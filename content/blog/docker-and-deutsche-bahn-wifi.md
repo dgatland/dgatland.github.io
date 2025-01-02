@@ -1,0 +1,88 @@
+---
+title: "Resolving Conflicts Between Docker and Deutsche Bahn Wi-Fi, on Linux"
+date: 2025-01-02
+featured: true
+description: "Docker's default configuration on Linux uses the IP range `172.17.0.0/24` to create local network bridges
+between containers."
+tags: ["Ubuntu"]
+image: "/images/forest_model.webp"
+fact: ""
+weight: 500
+sitemap:
+  priority : 0.8
+---
+
+Docker's default configuration on Linux uses the IP range `172.17.0.0/24` to create local network bridges between 
+containers. 
+This means containers can communicate over that network, and any network requests in that range will be redirected to 
+Docker and won't leave the device.
+This can create conflicts with other network services that use that IP range, such as Deutsche Bahn's WIFIonICE which 
+uses the range `172.18.0.0/16`.
+This conflict prevents the Wi-Fi's login page from loading properly, and therefore prevents the device from accessing 
+the Wi-Fi.
+
+### Problem
+When you attempt to connect to “WIFIonICE”, the sign up page doesn’t load; and when you manually go to the sign up page 
+(https://login.wifionice.de), the page won’t load. 
+
+### Cause 
+The root cause of the issue is that Docker’s default IP address range (`172.17.0.0/24`) overlaps with the IP range used 
+by WIFIonICE (`172.18.0.0/16`). 
+As a result, network traffic intended for the Wi-Fi login page is intercepted by Docker’s networking system, preventing 
+access to the page.
+
+### Solution
+The solution is to stop Docker, prune the (custom) network bridges, and clear the overlapping IP address. 
+If you need to use Docker on the train, you can also define a custom Docker configuration so that it uses a different IP
+range.
+
+##### View your current network configuration
+Run `ip a` (or `ifconfig`) to view the current network interface configuration.
+
+As well as `docker0` you will see one or more interfaces like `br-xxxxxxxx` which are the network bridges from 
+Docker. 
+One of these interfaces might be using the `172.18.0.1` address, causing the conflict.
+
+##### Stop the Docker network connections
+Stop these docker networks with `sudo ifconfig docker0 down` (and equivalent for the other network bridges).
+
+Then run `docker network prune` to clear those interfaces from the system entirely. 
+Don't worry, any network bridges that are removed will be recreated in the future when you run the relevant Docker 
+containers.
+
+##### Optional: to use Docker while connected to WIFIonICE
+To avoid the issue in the future, or to use Docker while connected to WIFIonICE, you can redefine the default IP address
+for Docker.
+To do this, edit or create the Docker daemon config file, at `/etc/docker/daemon.json`, to include configuration like
+the following (you can choose any suitable IP range):
+
+```
+{
+  "default-address-pools":
+  [
+    {"base":"192.168.0.0/16","size":24}
+  ]
+}
+```
+
+Note that the 192.168.x.x range is widely used in home and small office networks for private IP addressing. 
+Routers and other devices typically assign addresses from this range to devices on their local networks 
+(such as computers or printers).
+
+##### Restart Docker
+First, make sure that all containers are definitely stopped, e.g. with `docker compose down`. 
+You can also confirm this with `docker ps -a` and check that no containers are running.
+
+Then, make sure your new daemon configuration is loaded, by running `sudo systemctl daemon-reload` 
+(I'm not sure if this strictly necessary, but it doesn't hurt!).
+
+Finally, restart Docker with `sudo systemctl restart docker`.
+When Docker restarts, it should be using the network range you defined in your custom configuration file.
+
+
+### References
+Thanks to the following blog and support pages for helping me resolve this issue!
+
+* https://dev.to/ingosteinke/comment/21075
+* https://forum.ubuntuusers.de/topic/probleme-mit-dem-wifionice/
+* https://serverfault.com/questions/916941/configuring-docker-to-not-use-the-172-17-0-0-range

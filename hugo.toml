@@ -13,5 +13,5 @@ firstName = "Danielle"
 lastName = "Gatland"
 email = ""
 showContact = false
-sections = ["projects", "presentations"]
+sections = ["projects", "presentations", "blog"]
 profileImage = "images/DG_urban.jpg"
