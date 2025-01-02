@@ -47,8 +47,10 @@ One of these interfaces might be using the `172.18.0.1` address, causing the con
 Stop these docker networks with `sudo ifconfig docker0 down` (and equivalent for the other network bridges).
 
 Then run `docker network prune` to clear those interfaces from the system entirely. 
-Don't worry, any network bridges that are removed will be recreated in the future when you run the relevant Docker 
-containers.
+
+Note that any network bridges that are removed may create errors when trying to run some docker containers in the 
+future, because they will try to connect to a missing container.
+If that happens, you can rebuild the networks with `docker compose up <container_name> --force-recreate`.
 
 ##### Optional: to use Docker while connected to WIFIonICE
 To avoid the issue in the future, or to use Docker while connected to WIFIonICE, you can redefine the default IP address
