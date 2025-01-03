@@ -96,8 +96,9 @@ sudo systemctl start wol.service
 _**Issues with systemd:**_
 If you're using a system that relies on `/etc/network/interfaces` to configure your network (like older versions of 
 Debian-based distributions), you should add the command to the `iface` configuration. 
-To keep things simple, I haven't included those instructions here, so you'll have to keep looking for how to configure
-that.
+To keep things simple, I haven't included those instructions here.
+You can check out my GitHub source code for those instructions (as a comment at the bottom of this page), or keep 
+looking for other solutions.
 
 **Optional read: investigating the BIOS configuration**
 
@@ -120,4 +121,34 @@ Thanks to the following pages which helped me to diagnose and resolve this issue
 * https://necromuralist.github.io/posts/enabling-wake-on-lan/
 * https://www.thomas-krenn.com/en/wiki/Predictable_Network_Interface_Names
 
-<!-- + text + -->
+<!-- 
+# Network interfaces solution
+
+Add configuration to /etc/network/interfaces (Debian/Ubuntu-based systems)
+
+If you're using a system that uses /etc/network/interfaces to configure your network (like older versions of 
+Debian-based distributions), you can add the command to the iface configuration. Here's how:
+
+1. Edit the `/etc/network/interfaces` file, eg with `nano`. 
+Modify the network interface configuration: 
+Find the configuration for your network interface (e.g., enpxxxxxx) and add the `ethtool` command after the ``iface` 
+line. 
+It should look like this:
+
+```
+auto enpxxxxxx
+iface enpxxxxxx inet dhcp
+    post-up /sbin/ethtool --change enpxxxxxx wol d
+```
+
+The `post-up` directive ensures that the `ethtool` command is executed after the interface is brought up.
+
+2. Restart networking or reboot: You can reboot the entire system, or just restart the networking service to apply the 
+changes:
+
+```
+sudo systemctl restart networking
+```
+
+That should be it!
+ -->
