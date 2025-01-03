@@ -2,7 +2,7 @@
 <div class="resume-item d-flex flex-row mb-5">
   <div class="presentation-content mr-auto">
     <h3 class="mb-0"><a href="{{ .Permalink }}">{{ .Params.title }}</a></h3>
-    <div>{{ .Summary | safeHTML }}</div>
+    <div>{{ .Description | safeHTML }}</div>
     <div>{{ partial "advtags" . }}</div>
   </div>
   <div class="resume-date text-md-right flex-col">

@@ -1,17 +1,32 @@
 ---
-title: "Resolving Conflicts Between Docker and Deutsche Bahn Wi-Fi, on Linux"
+title: "Connecting to Deutsche Bahn Wi-Fi, Bypassing Docker on Linux Conflicts"
 date: 2025-01-02
 featured: true
-description: "Docker's default configuration on Linux uses the IP range `172.17.0.0/24` to create local network bridges
-between containers."
+description: "Docker's default configuration on Linux has an IP address conflict with Deutsche Bahn's WIFIonICE. 
+The conflict meant that I couldn't connect to the WIFIonICE.
+This blog post describes how I was able to resolve the issue."
 tags: ["Ubuntu"]
-image: "/images/forest_model.webp"
+image: ""
 fact: ""
 weight: 500
 sitemap:
   priority : 0.8
 ---
 
+One cold winter's day, I boarded a long-distance train towards Berlin and pulled out my laptop to start work for the day.
+Only to be surprised that the Wi-Fi was broken!
+After testing the connection from my phone, I discovered that this must be due to some Ubuntu configuration issue.
+So, into the rabbit hole of Stack Overflow posts I dived, to see if this was fixable.
+And it was!
+This blog posts outlines what causes the issue, and how I was able to resolve it.
+
+### Symptom
+When you attempt to connect to “WIFIonICE”, the sign up page doesn’t load; and when you manually go to the sign up page 
+(https://login.wifionice.de), the page won’t load. 
+
+I experienced this issue with Ubuntu 24.04 and Docker version 27.4.1 (_spoiler alert, Docker was the cause!_).
+
+### Problem
 Docker's default configuration on Linux uses the IP range `172.17.0.0/24` to create local network bridges between 
 containers. 
 This means containers can communicate over that network, and any network requests in that range will be redirected to 
@@ -20,16 +35,6 @@ This can create conflicts with other network services that use that IP range, su
 uses the range `172.18.0.0/16`.
 This conflict prevents the Wi-Fi's login page from loading properly, and therefore prevents the device from accessing 
 the Wi-Fi.
-
-### Problem
-When you attempt to connect to “WIFIonICE”, the sign up page doesn’t load; and when you manually go to the sign up page 
-(https://login.wifionice.de), the page won’t load. 
-
-### Cause 
-The root cause of the issue is that Docker’s default IP address range (`172.17.0.0/24`) overlaps with the IP range used 
-by WIFIonICE (`172.18.0.0/16`). 
-As a result, network traffic intended for the Wi-Fi login page is intercepted by Docker’s networking system, preventing 
-access to the page.
 
 ### Solution
 The solution is to stop Docker, prune the (custom) network bridges, and clear the overlapping IP address. 
