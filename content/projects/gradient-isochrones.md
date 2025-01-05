@@ -13,9 +13,9 @@ sitemap:
   priority : 0.8
 ---
 
-In my public tranport planning work at MRCagney, I was often asked how we could better communicate the impacts of
-frequency and time of day on travel time catchments. A travel time catchment (an "isochrone") is a map where an area is
-coloured to show what places are accessible within a travel time limit from a given origin.
+In my public tranport planning work at [MRCagney](https://www.mrcagney.com/), I was often asked how we could better 
+communicate the impacts of frequency and time of day on travel time catchments. A travel time catchment (an "isochrone") 
+is a map where an area is coloured to show what places are accessible within a travel time limit from a given origin.
 
 Traditionally, a single isochrone map would be produced for a given journey start time, e.g. 8am. It would be created for 
 either a single travel time limit (e.g. 30 minutes), or sometimes for multiple travel time limits (e.g. 15, 30 and 45

@@ -12,9 +12,10 @@ sitemap:
   priority : 0.8
 ---
 
-MRCagney Reports, an internal project management web app, began as a personal project of mine to improve on other 
-project management platforms I had seen and/or trialled. After struggling to review timesheets and budgets while 
-managing projects, and constantly applying manual techniques for each project I managed, I decided to try something new. 
+MRCagney Reports, an internal project management web app, began as a personal project of mine while at [MRCagney](https://www.mrcagney.com/) 
+to improve on other project management platforms I had seen and/or trialled. After struggling to review timesheets and 
+budgets while managing projects, and constantly applying manual techniques for each project I managed, I decided to try 
+something new. 
 I created an interactive dashboard to summarise timesheets and budgets for all projects in one place.
 
 After developing an initial prototype, I shared my concept with my colleagues and management at MRCagney and got 

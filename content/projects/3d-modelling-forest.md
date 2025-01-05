@@ -14,10 +14,10 @@ sitemap:
   priority : 0.8
 ---
 
-As part of a research and development project at Carbon Critical, I built a 3D modelled landscape in Blender for 
-creating simulated renders of pine plantations. Initially, I simulated a single pine plantation from which we could 
-render images from different positions and angles. I then extended this model using Blender's Python integration to be
-able to simulate variations to:
+As part of a research and development project at [Carbon Critical](https://www.carboncritical.org/), I built a 3D 
+modelled landscape in Blender for creating simulated renders of pine plantations. 
+Initially, I simulated a single pine plantation from which we could render images from different positions and angles. 
+I then extended this model using Blender's Python integration to be able to simulate variations to:
 
 * The age of the pine plantation, including both the size of trees and "tree thinning" over time.
 * The planting density of trees, representing the spacing and variability of spacing between trees.

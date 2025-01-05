@@ -14,10 +14,11 @@ sitemap:
   priority : 0.8
 ---
 
-I led the development of an online housing capacity model for Whangārei. The model computes the plan-enabled and 
-commercially feasible housing capacity of the urban environment of Whangārei. It was developed to help the Council meet 
-the statutory requirements of the National Policy Statement on Urban Development (2020). I was the project manager for
-this project and also led the data science for the data pre-processing elements of the project.
+I led the development of an online housing capacity model for Whangārei while working for [MRCagney](https://www.mrcagney.com/). 
+The model computes the plan-enabled and commercially feasible housing capacity of the urban environment of Whangārei. 
+It was developed to help the Council meet the statutory requirements of the National Policy Statement on Urban 
+Development (2020). I was the project manager for this project and also led the data science for the data pre-processing 
+elements of the project.
 
 I developed and implemented a complex and detailed geospatial processing pipeline as 
 pre-processing for our computational Housing Capacity and Feasibility Model for Whangārei District Council. The model 
