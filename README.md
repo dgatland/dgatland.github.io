@@ -3,7 +3,7 @@ My Portfolio Website
 
 Installation
 =============
-`sudo snap install hugo`
+`sudo snap install hugo` to install across the system, or create a virtual environment and `pip install hugo`
 
 Run
 ====

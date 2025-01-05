@@ -12,10 +12,11 @@ sitemap:
   priority : 0.8
 ---
 
-In my work at MRCagney, we would occassionally undergo spatial data collection activities. This wasn't part of our core
-work and would happen only a few times per year. We had never found the opportunity to invest the time to develop an
-app-based approach for data collection activities (and were instead still using pen and paper!). I used the opportunity 
-of an upcoming project along with some free time to investigate the options for app-based spatial data collection. 
+In my work at [MRCagney](https://www.mrcagney.com/), we would occassionally undergo spatial data collection activities. 
+This wasn't part of our core work and would happen only a few times per year. We had never found the opportunity to 
+invest the time to develop an app-based approach for data collection activities (and were instead still using pen and 
+paper!). I used the opportunity of an upcoming project along with some free time to investigate the options for 
+app-based spatial data collection. 
 Although I knew ArcGIS had enterprise solutions, I was particularly interested in what we could do with QGIS, the open 
 source alternative (and my preferred geospatial software).
 
