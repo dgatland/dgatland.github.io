@@ -1,6 +1,6 @@
 ---
 title: "Multispecies Tree Carbon Dashboard for New Zealand"
-date: 2024-12-18
+date: 2025-01-05
 featured: true
 description: "I converted a complex forestry model built in Excel and VBA into a Python model.
 This involved completely reverse-engineering the spreadsheet model and restructuring it's implementation in a Pythonic
