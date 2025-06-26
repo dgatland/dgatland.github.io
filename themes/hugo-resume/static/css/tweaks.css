@@ -24,7 +24,7 @@ img {
       vertical-align: sub;
 }
 
-/* ensure items with short summarues push date over image */
+/* ensure items with short summaries push date over image */
 .presentation-content{
   width:90%;
 }
@@ -149,3 +149,15 @@ div.skills-heading{
     img.qrcode {
       max-width: 300px !important;
     }
+
+
+/* Table formatting */
+table {
+  border: 1px solid;
+  padding: 5px;
+}
+
+th, td {
+  border: 1px solid;
+  padding: 0.5em;
+}
